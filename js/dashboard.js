@@ -36,7 +36,7 @@ const laptopScreen = {
 
 //1920 * 1080
 const monitorScreen = {
-    marginLeft: "39%", width: "37.5%", height: "92%", selection: 13
+    marginLeft: "39%", width: "37.6%", height: "92%", selection: 13
 };
 
 const windowInnerWidth = window.innerWidth;
