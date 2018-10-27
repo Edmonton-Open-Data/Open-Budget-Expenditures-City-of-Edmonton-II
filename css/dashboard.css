@@ -31,3 +31,7 @@
 }
 
 span.number-display { font-size: 2.5em; }
+
+@media (min-width: 1920px) {
+    span.number-display { font-size: 4.75em; }
+}

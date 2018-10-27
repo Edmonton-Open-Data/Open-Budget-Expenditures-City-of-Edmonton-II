@@ -36,7 +36,7 @@ const laptopScreen = {
 
 //1920 * 1080
 const monitorScreen = {
-    marginLeft: "38.5%", width: "37%", height: "92%", selection: 13
+    marginLeft: "39%", width: "37%", height: "92%", selection: 13
 };
 
 const windowInnerWidth = window.innerWidth;
@@ -140,7 +140,7 @@ function viz(response, sunburstColors) {
     row.xAxis().ticks(4); 
     
     sunBurst
-        .height(sunBurst.width() * 0.908)
+        .height(sunBurst.width() * 0.898)
         .label(d => d.budget, false)
         .dimension(branProgDim)
         .group(branProgGrp)
