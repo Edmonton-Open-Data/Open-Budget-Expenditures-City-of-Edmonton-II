@@ -1,0 +1,167 @@
+<!doctype html>
+<html>
+<head>
+    <title>Open Budget - Expenditures</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="libs/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="libs/keen_io/keen-dashboards.css">
+    <link rel="stylesheet" href="libs/dc.js/dc.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body class="application">
+    <div class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:none" id="mySidebar">
+        <button class="w3-bar-item w3-button w3-large"onclick="w3_close()">Close &times;</button>
+        <a href="http://budget.edmonton.ca/#!/year/default" target="_blank" class="w3-bar-item w3-button">Open Budget (Website Link)</a>
+        <div class="w3-bar-item w3-button sel" onclick="myAccFunc('demoAcc')">Departments <i class="fa fa-caret-down"></i></div>
+        <div id="demoAcc" class="w3-hide w3-white w3-card-4">
+            <div class="w3-bar-item w3-button" id="sel-departments"></div>
+        </div>
+        <div class="w3-bar-item w3-button sel" onclick="myAccFunc('demoAcc1')">Years <i class="fa fa-caret-down"></i></div>
+        <div id="demoAcc1" class="w3-hide w3-white w3-card-4">
+            <div class="w3-bar-item w3-button" id="sel-years"></div>
+        </div>
+        <div class="w3-bar-item w3-button sel" onclick="myAccFunc('demoAcc2')">Fund Types <i class="fa fa-caret-down"></i></div>
+        <div id="demoAcc2" class="w3-hide w3-white w3-card-4">
+            <div class="w3-bar-item w3-button" id="sel-fundtypes"></div>
+        </div>
+        <div class="w3-bar-item w3-button sel" onclick="myAccFunc('demoAcc3')">Fund Types & Years <i class="fa fa-caret-down"></i></div>
+        <div id="demoAcc3" class="w3-hide w3-white w3-card-4">
+            <div class="w3-bar-item w3-button" id="sel-fundtypes-years"></div>
+        </div>
+        <div class="w3-bar-item w3-button sel" onclick="myAccFunc('demoAcc4')">Branches & Programs <i class="fa fa-caret-down"></i></div>
+        <div id="demoAcc4" class="w3-hide w3-white w3-card-4">
+            <div class="w3-bar-item w3-button" id="sel-branch-programs"></div>
+        </div>
+    </div>
+    <!-- Makes Row Responsive -->
+    <div id="main" class="container-fluid">
+        <!-- Navbar -->
+        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button id="openNav" class="w3-button w3-darkblue w3-large" onclick="w3_open()">
+                        &#9776; Open Budget Expenditures - City of Edmonton
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!-- column 1 for row -->
+            <div class="col-md-4">
+                <!-- row in column 1 -->
+                <div class="row">
+                    <!-- Row Chart -->
+                    <div class="col-md-12">
+                        <div class="chart-wrapper">
+                            <div class="chart-stage">
+                                <div id="row-chart" class="svg-container">
+                                    <div class="chart-title">
+                                        <span>Departments</span>
+                                        <span>
+                                            <a class="reset" style="display:none; color: rgb(36, 118, 179);" 
+                                               href="javascript:row.filterAll(); dc.redrawAll();">
+                                                Reset
+                                            </a>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+            <!-- column 2 for row -->
+            <div class="col-md-4">
+                <!-- row in column 2 -->
+                <div class="row">
+                    <!-- Number Display -->
+                    <div class="col-md-12">
+                        <div class="chart-wrapper">
+                            <div class="chart-stage">
+                                <div id="number-stat" class="svg-container">
+                                    <div class="chart-title">
+                                        <span>Sum of Budget Expenditure</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Heatmap Chart -->
+                    <div class="col-md-12">
+                        <div class="chart-wrapper">
+                            <div class="chart-stage">
+                                <div id="heatmap-chart" class="svg-container">
+                                    <div class="chart-title">
+                                        <span>Years & Fund Types</span>
+                                        <span>
+                                            <a class="reset" style="display:none; color: rgb(36, 118, 179);" 
+                                               href="javascript:heatMap.filterAll(); dc.redrawAll();">
+                                                Reset
+                                            </a>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                      
+                </div>
+            </div>
+            <!-- column 3 for row -->
+            <div class="col-md-4">
+                <!-- row in column 3 -->
+                <div class="row">
+                    <!-- Sunburst -->
+                    <div class="col-md-12">
+                        <div class="chart-wrapper">
+                            <div class="chart-stage">
+                                <div id="sun-burst" class="svg-container">
+                                    <div class="chart-title">
+                                        <span>Branches & Programs</span>
+                                        <span>
+                                            <a class="reset" style="display:none; color: rgb(36, 118, 179);" 
+                                               href="javascript:sunBurst.filterAll(); dc.redrawAll();">
+                                                Reset
+                                            </a>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- column 4 for row -->
+            <div class="col-md-12">
+                <!-- row in column 4 -->
+                <div class="row">
+                    <!-- Data Table -->
+                    <div class="col-md-12">
+                        <div class="chart-wrapper">
+                            <div class="chart-stage">
+                                <div id="data-table">
+                                    <div class="chart-title">
+                                        <span>Expenditure Table - </span>
+                                        <span id="records-count"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="libs/d3/d3.min.js"></script>
+    <script src="libs/crossfilter/crossfilter.js"></script>
+    <script src="libs/jquery/jquery.js"></script>
+    <script src="libs/dataTables/jquery.dataTables.min.js"></script>
+    <script src="libs/dc.js/dc.min.js"></script>
+    <script src="libs/dc.js/dc.datatables.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+    <script src="js/dashboard.js" lang="babel" type="text/babel"></script>
+</body>
+</html>
